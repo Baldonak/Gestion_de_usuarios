@@ -1,4 +1,9 @@
-
+.disponible {
+    color: green;
+  }
+  .no-disponible{
+    color: red;
+  }
 body {
 
 margin: 0px;

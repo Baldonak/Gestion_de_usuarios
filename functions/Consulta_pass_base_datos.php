@@ -1,6 +1,6 @@
 <?php
 
-function Consulta_base_datos(){
+function Consulta_pass_base_datos($user_name){
 
 
         // DATOS DE CONEXIÓN
@@ -13,7 +13,8 @@ function Consulta_base_datos(){
     
         //NUMERO TOTAL DE REGISTROS
             
-            $sql_total = "SELECT `user_pass` FROM $Nombre_base_de_datos WHERE `user_name` LIKE $_POST['user_name']";
+            $sql_total = "SELECT `id`, `user_name`, `user_pass`, `email`, `status`, `user_type`
+            FROM $Tabla WHERE `user_name` LIKE '$user_name'";
 
         /*WHERE 
             `titol` LIKE '%$Palabras_buscadas%' OR

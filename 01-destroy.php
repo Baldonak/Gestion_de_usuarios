@@ -23,7 +23,7 @@
         echo "No hi ha cap sessió iniciada. Primer inicia la sessio";
     }
 
-    header ("Location: index.php"); //Nos sirve para redireccionar al archivo.
+    header ("Location: urls/login.php"); //Nos sirve para redireccionar al archivo.
     exit();
 
 

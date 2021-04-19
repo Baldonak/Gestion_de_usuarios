@@ -13,7 +13,6 @@ ID | NOMBRE | APELLIDOS | EDAD
     $Pass = "";
     $Nombre_base_de_datos = "registro_usuarios";
     $Tabla = "usuarios";
-
     $Fecha_de_creacion = "created";
 
     //fem la connexió
@@ -82,7 +81,7 @@ if ($conn->query($sql) === TRUE) { //tot ok
 
 $conn->close(); //tanquem la connexió amb la base de dades
 
-$nuevaURL = '../_index.php';
+$nuevaURL = '../urls/login.php';
 
 header('Location: '.$nuevaURL);
 ?>

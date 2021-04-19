@@ -9,11 +9,11 @@ ID | NOMBRE | APELLIDOS | EDAD
 
 //dades de connexió
     $Servidor = "localhost";
-    $Usuario =  "User_01";
-    $Pass = "1234";
-    $Nombre_base_de_datos = "filmoteca";
-    $Tabla = "pellicules";
-    $Fecha_de_creacion = "Fecha_de_creacion";
+    $Usuario =  "registro_usuarios";
+    $Pass = "";
+    $Nombre_base_de_datos = "registro_usuarios";
+    $Tabla = "usuarios";
+    $Fecha_de_creacion = "created";
 
     //fem la connexió
     $conn = new mysqli($Servidor, $Usuario, $Pass, $Nombre_base_de_datos);
@@ -27,7 +27,7 @@ ID | NOMBRE | APELLIDOS | EDAD
 //consulta
 //INSERT INTO table_pellicules (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);
 
-
+session_start();
 
 $sql = "DELETE FROM $Tabla WHERE id = ?";
 
@@ -36,18 +36,13 @@ $sql = "DELETE FROM $Tabla WHERE id = ?";
     $stmt->bind_param("d", $Id);
      
         //Id a eliminar
-            $Id = $_POST["Id"];
+            $Id = $_SESSION["id"];
 
     $stmt->execute();
 
-$sql_total = "SELECT * FROM $Tabla ORDER BY $Fecha_de_creacion DESC ";
-
     //ELIMINAR IMAGEN -------------------------------------------------------------
 
-    //Subir_archivos('../img/movie_covers', $_FILES['User_file'], $Id );
-        //function Subir_archivos($directorio_destino, $nombre_fichero)
-
-    $Ruta_definitiva = "../img/movie_covers/$Id.jpg";
+    $Ruta_definitiva = "../img/Fotos_de_perfil/$Id.jpg";
 
     if(isset($Ruta_definitiva)){
 
@@ -67,7 +62,7 @@ if ($conn->query($sql) === TRUE) { //tot ok
 
 $conn->close(); //tanquem la connexió amb la base de dades
 
-$nuevaURL = '../_index.php';
+$nuevaURL = '../01-destroy.php';
 
 header('Location: '.$nuevaURL);
 ?>

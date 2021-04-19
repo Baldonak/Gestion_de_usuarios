@@ -8,11 +8,11 @@ ID | NOMBRE | APELLIDOS | EDAD
 
 //dades de connexió
     $Servidor = "localhost";
-    $Usuario =  "User_01";
-    $Pass = "1234";
-    $Nombre_base_de_datos = "filmoteca";
-    $Tabla = "pellicules";
-    $Fecha_de_creacion = "Fecha_de_creacion";
+    $Usuario =  "registro_usuarios";
+    $Pass = "";
+    $Nombre_base_de_datos = "registro_usuarios";
+    $Tabla = "usuarios";
+    $Fecha_de_creacion = "created";
 
     //fem la connexió
     $conn = new mysqli($Servidor, $Usuario, $Pass, $Nombre_base_de_datos);
@@ -28,22 +28,20 @@ ID | NOMBRE | APELLIDOS | EDAD
 
 
 
-$sql = "UPDATE $Tabla SET titol=?, director=?, any=?, id_pais=?, puntuacio=?, id_genere=?
+$sql = "UPDATE $Tabla SET user_name=?, email=?, updated=?
         WHERE id = ?";
 
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssddddd", $Titulo, $Director, $Year, $Pais, $Puntuacion, $Id_genere, $Id);
+    $stmt->bind_param("sssd", $user_name, $email, $updated, $Id);
      
         //Id a modificar
             $Id = $_POST["Id"];
         //dades del registre a insertar:
-            $Titulo = $_POST["Titulo"];
-            $Director = $_POST["Director"];
-            $Year = $_POST["Year"];
-            $Pais = $_POST["Pais"];
-            $Puntuacion = $_POST["Puntuacion"]; 
-            $Id_genere = $_POST["Genero"];
+            $user_name = $_POST["user_name"];
+            $email = $_POST["email"];
+            $updated = date('m-d-Y h:i:s a', time());  
+            
 
     $stmt->execute();
 
@@ -67,7 +65,7 @@ $sql_total = "SELECT * FROM $Tabla ORDER BY $Fecha_de_creacion DESC ";
     if(isset($_FILES["User_file"])){
         
         $Ruta_temporal =  $_FILES['User_file']['tmp_name'];
-        $Ruta_definitiva = "../img/movie_covers/$Id.jpg";
+        $Ruta_definitiva = "../img/Fotos_de_perfil/$Id.jpg";
 
         echo $Ruta_definitiva;
         
@@ -87,7 +85,7 @@ if ($conn->query($sql) === TRUE) { //tot ok
 
 $conn->close(); //tanquem la connexió amb la base de dades
 
-$nuevaURL = '../_index.php';
+$nuevaURL = '../01-destroy.php';
 
 header('Location: '.$nuevaURL);
 ?>

@@ -28,21 +28,26 @@
 	<link href="../img/favicon.png" rel="icon" type="image/png" />
 	
 	<!-- Títol de la pàgina -->
-	<title>Registro</title>
+	<title>Modificar</title>
 </head>
 <body>
 	<header></header>
+
+    <?php
+        session_start();
+        
+    ?>
 	<section>
 		<article>
-            <h3>Registro</h3>
+            <h3>Modificar</h3>
 
-            <form action="../functions/Insert_data_base.php" method="POST" enctype="multipart/form-data">
-                <p>User name:<input type="text" id="user_name" name= "user_name" oninput="check()"/></p>
+            <form action="../functions/Actualizar_base_datos.php" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="Id" value= <?php echo $_SESSION["id"]; ?> > 
+                <p>User name:<input type="text" id="user_name" name= "user_name" oninput="check()"
+                value= "<?php echo $_SESSION["Nombre"]; ?>"/></p>
 					<span id="missatge"></span>
 					<p><img src="../img/preloader.gif" id="preloader" style="display:none" ></p>
-				<p>Password:<input type="password" id="user_pass" name= "user_pass"/></p>
-				<p>Repit the password:<input type="password" id="pass" name= "pass"/></p>
-				<p>Email:<input type="email" id="email" name= "email"/></p>
+				<p>Email:<input type="email" id="email" name= "email" value= "<?php echo $_SESSION["email"]; ?>"/></p>
 				<p>Foto de perfil:<input type="file" name="User_file"></p><br>
                 <button type="submit" >Enviar</button> 
                 
@@ -52,29 +57,7 @@
 
             <br><br>
 
-            <?php
-
-            session_start(); //Para poder utilizar las variables de sesión (Reanudar la sesión)
-
-                if (!isset($_SESSION["comptador"])){ 
-
-                    echo "No et conèc <br>";
-                }
-                else{ 
-
-					if (isset($_SESSION["Nombre"])){
-						echo '<style> form {display: none;} </style>';
-                    	echo "Hola ".($_SESSION["Nombre"])." !<br>";
-						echo '<a href="01-destroy.php">Cerrar sesión</a>';
-					}
-					else {
-						echo "No se ha introducido el usuario y/o la contraseña correcta";
-					}
-                }
-
-            ?>
-
-
+            
 
 		</article>
 	</section>

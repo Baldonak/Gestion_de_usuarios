@@ -31,8 +31,8 @@
             <h3>Sessions: Exercici 1</h3>
 
             <form action="../01-start.php" method="POST">
-                <p>Usuario:<input type="text" id="Nombre" name= "Nombre"/></p>
-				<p>Contraseña:<input type="password" id="Pass" name= "Pass"/></p>
+                <p>Usuario:<input type="text" id="user_name" name= "user_name"/></p>
+				<p>Contraseña:<input type="password" id="user_pass" name= "user_pass"/></p>
                 <button type="submit" >Enviar</button> 
                 
             </form>
@@ -54,7 +54,33 @@
 					if (isset($_SESSION["Nombre"])){
 						echo '<style> form {display: none;} </style>';
                     	echo "Hola ".($_SESSION["Nombre"])." !<br>";
-						echo '<a href="01-destroy.php">Cerrar sesión</a>';
+
+						$img_path = '../img/Fotos_de_perfil/'.$_SESSION["id"].'.jpg';
+
+						if (file_exists($img_path)){
+							echo "<img src='".$img_path."' width='30px' height='30px'>";
+							echo "<br>";
+							echo "(con imagen)";
+							echo "<br>";
+							echo "id del usuario: ".$_SESSION["id"];
+							echo "<br>";
+						}
+						else{
+							echo "<img src='../img/Fotos_de_perfil/anonimo.jpg' width='30px' height='30px'>";
+							echo "<br>";
+							echo "(sin imagen)";
+							echo "<br>";
+							echo "id del usuario: ".$_SESSION["id"];
+							echo "<br>";
+						}
+						
+						
+						echo '<a href="modify.php">Modificar</a>';
+						echo "<br>";
+						echo '<a href="../functions/Eliminar_entrada_base_datos.php">Eliminar perfil</a>';
+						echo "<br>";
+						echo '<a href="../01-destroy.php">Cerrar sesión</a>';
+
 					}
 					else {
 						echo "No se ha introducido el usuario y/o la contraseña correcta";
